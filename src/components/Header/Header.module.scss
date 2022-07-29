@@ -1,0 +1,51 @@
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 8px;
+}
+
+.headerLeft {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-self: start;
+  grid-column-gap: 16px;
+}
+
+.status {
+  letter-spacing: -0.06em;
+  color: #b6b6b6;
+}
+
+.headerRight {
+  justify-self: end;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 20px;
+  margin-left: 24px;
+}
+
+.cartRectangle {
+  padding: 12px 20px;
+  border-radius: 7px;
+  background: #333333;
+  display: grid;
+  column-gap: 10px;
+  grid-auto-flow: column;
+  max-height: 50px;
+
+  h5 {
+    margin-top: 3px;
+  }
+}
+
+.headerLine {
+  height: 1px;
+  width: 105%;
+  background: #e3e3e3;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  align-self: center;
+  transform: translateX(-30px);
+}

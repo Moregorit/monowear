@@ -1,0 +1,151 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Футболка в стиле оверсайз",
+      "img": [
+        "t-shirt-oversized-white.webp",
+        "t-shirt-oversized-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "price": 1499,
+      "category": [
+        "Все",
+        "Футболки"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Укороченые свободные спортивные штаны Nike",
+      "img": [
+        "joggers-free-crop-white.webp",
+        "joggers-free-crop-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "price": 2349,
+      "category": [
+        "Все",
+        "Штаны и шорты"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Шорты Nike в стиле оверсайз",
+      "img": [
+        "shorts-nike-oversized-white.webp",
+        "shorts-nike-oversized-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "price": 1599,
+      "category": [
+        "Все",
+        "Штаны и шорты"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Свободная джинсовка Levi's",
+      "img": [
+        "jeans-jacket-white.webp",
+        "jeans-jacket-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "price": 4449,
+      "category": [
+        "Все",
+        "Верхняя одежда"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Носки длинные трикотажные",
+      "img": [
+        "socks-long-ribbed-white.webp",
+        "socks-long-ribbed-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "36-39",
+        "40-42",
+        "43-45"
+      ],
+      "price": 999,
+      "category": [
+        "Все",
+        "Аксессуары"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Зауженные джоггеры Puma",
+      "img": [
+        "joggers-puma-white.webp",
+        "joggers-puma-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "price": 1549,
+      "category": [
+        "Все",
+        "Штаны и шорты"
+      ]
+    }
+  ],
+  "categories": [
+    "Все",
+    "Футболки",
+    "Толстовки",
+    "Штаны и шорты",
+    "Верхняя одежда",
+    "Аксессуары"
+  ],
+  "cart": [],
+  "favorites": []
+}
