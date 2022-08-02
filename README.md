@@ -3,6 +3,7 @@
 
 ### **How to get started:**
 
-
+tg: @Moregorit
+vk: @prostoarturka
 *Peace☮️*
 
