@@ -4,6 +4,7 @@
 ### **How to get started:**
 
 tg: @Moregorit
-vk: @prostoarturka
+           vk: @prostoarturka
+
 *Peace☮️*
 
