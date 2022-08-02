@@ -21,7 +21,8 @@
       "category": [
         "Все",
         "Футболки"
-      ]
+      ],
+      "ordersQuantity": 37
     },
     {
       "id": 2,
@@ -44,7 +45,8 @@
       "category": [
         "Все",
         "Штаны и шорты"
-      ]
+      ],
+      "ordersQuantity": 1562
     },
     {
       "id": 3,
@@ -67,7 +69,8 @@
       "category": [
         "Все",
         "Штаны и шорты"
-      ]
+      ],
+      "ordersQuantity": 677
     },
     {
       "id": 4,
@@ -90,7 +93,8 @@
       "category": [
         "Все",
         "Верхняя одежда"
-      ]
+      ],
+      "ordersQuantity": 387
     },
     {
       "id": 5,
@@ -112,7 +116,8 @@
       "category": [
         "Все",
         "Аксессуары"
-      ]
+      ],
+      "ordersQuantity": 892
     },
     {
       "id": 6,
@@ -135,7 +140,8 @@
       "category": [
         "Все",
         "Штаны и шорты"
-      ]
+      ],
+      "ordersQuantity": 2060
     }
   ],
   "categories": [
@@ -147,5 +153,77 @@
     "Аксессуары"
   ],
   "cart": [],
-  "favorites": []
+  "favorites": [
+    {
+      "id": 2,
+      "name": "Укороченые свободные спортивные штаны Nike",
+      "img": [
+        "joggers-free-crop-white.webp",
+        "joggers-free-crop-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "price": 2349,
+      "category": [
+        "Все",
+        "Штаны и шорты"
+      ],
+      "ordersQuantity": 1562
+    },
+    {
+      "id": 3,
+      "name": "Шорты Nike в стиле оверсайз",
+      "img": [
+        "shorts-nike-oversized-white.webp",
+        "shorts-nike-oversized-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "price": 1599,
+      "category": [
+        "Все",
+        "Штаны и шорты"
+      ],
+      "ordersQuantity": 677
+    },
+    {
+      "id": 5,
+      "name": "Носки длинные трикотажные",
+      "img": [
+        "socks-long-ribbed-white.webp",
+        "socks-long-ribbed-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "36-39",
+        "40-42",
+        "43-45"
+      ],
+      "price": 999,
+      "category": [
+        "Все",
+        "Аксессуары"
+      ],
+      "ordersQuantity": 892
+    }
+  ]
 }

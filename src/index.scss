@@ -4,12 +4,15 @@
   box-sizing: border-box;
 }
 body {
+  
   background: #f3f3f3;
   font-family: "Montserrat";
   color: #333333;
   overflow-x: hidden;
-  overflow-y: scroll;
-  padding: 0 20px;
+  overflow-y: scroll ;
+  width: 100%;
+  height: 100%;
+  padding: 0 3%;
   &::-webkit-scrollbar {
     position: absolute;
     width: 5px;
@@ -73,38 +76,36 @@ input {
 }
 
 .wrapper {
-  background: #ffffff;
+  background: #fff;
   border-radius: 10px;
-  max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
-  height: 100%;
-  padding: 20px 50px;
+  height: fit-content;
+  padding: 0 30px;
 }
 
 .wrapperMobile {
   padding: 20px 35px;
 }
 
-
 .backButton {
   display: flex;
   margin-bottom: 12px;
 
   &:hover {
-  cursor: pointer; 
-  img {
-    transform: translateX(-5px);
-    transition: all 0.15s ease-in-out;
-  }
-  h6{
-    color: #a3a3a3;
-  }
+    cursor: pointer;
+    img {
+      transform: translateX(-5px);
+      transition: all 0.15s ease-in-out;
+    }
+    h6 {
+      color: #a3a3a3;
+    }
   }
 
   img {
     margin-right: 12px;
     transition: all 0.15s ease-in-out;
-
   }
   h6 {
     color: #b6b6b6;
@@ -147,7 +148,12 @@ input {
   padding: 14px 20px;
   font-weight: 600;
   font-size: 15px;
-  width: fit-content;
+  width: max-content;
+  &:hover {
+    cursor: pointer;
+    background: #e9e9e9;
+    transition: all 0.15s ease-in-out;
+  }
 }
 
 .categoryActive {
@@ -155,32 +161,9 @@ input {
   color: #fff;
   border-radius: 7px;
   padding: 14px 20px;
-  width: fit-content;
+  width: max-content;
   font-weight: 600;
   font-size: 15px;
-}
-
-.sort {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, max-content));
-  justify-items: end;
-  column-gap: 12px;
-  align-items: center;
-  transform: translateY(-5px);
-
-  h6 {
-    > * {
-      margin-right: 8px;
-    }
-  }
-}
-
-.sortValue {
-  font-weight: 400;
-}
-
-.dashedUnderline {
-  text-decoration: underline dashed #b6b6b6;
 }
 
 .title {
@@ -192,5 +175,6 @@ input {
   grid-template-columns: repeat(auto-fit, min(250px));
   column-gap: 65px;
   row-gap: 30px;
-  justify-content: start;
+  justify-content: space-around;
+  margin-right: 20px;
 }

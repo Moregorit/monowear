@@ -8,6 +8,7 @@ import Cart from "./pages/Cart/Cart";
 import AppContext from "./context";
 import Home from "./pages/Home/Home";
 import Favorites from "./pages/Favorites/Favorites";
+import ModalSizeColor from "./components/ModalSizeColor/ModalSizeColor";
 
 function App() {
   const [items, setItems] = React.useState([]);
@@ -17,6 +18,8 @@ function App() {
   const [selectedCategory, setSelectedCategory] = React.useState("Все");
   const [loading, setIsLoading] = React.useState(false);
   const [searchValue, setSearchValue] = React.useState("");
+  const [sortValue, setSortValue] = React.useState("популярность");
+  const [modalActive, setModalActive] = React.useState(false);
 
   const isMobile = window.matchMedia("(max-width: 926px)").matches;
   // (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
@@ -37,7 +40,9 @@ function App() {
         .get("http://localhost:3003/favorites")
         .then((res) => res);
 
-      await setItems(itemsRes.data);
+      await setItems(
+        itemsRes.data.sort((a, b) => b.ordersQuantity - a.ordersQuantity)
+      );
       await setCartItems(cartItemsRes.data);
       await setCategories(categoriesRes.data);
       await setFavorites(favoritesRes.data);
@@ -45,6 +50,16 @@ function App() {
     }
 
     fetchData();
+  }, []);
+
+  const timerRef = React.useRef(null);
+  const handleTimeout = () => {
+    timerRef.current = setTimeout(() => {
+      setModalActive(false);
+    }, 2000);
+  };
+  React.useEffect(() => {
+    return () => clearTimeout(timerRef.current); // очистка таймера
   }, []);
 
   const onAddToCart = async (item, selectedColor, selectedSize) => {
@@ -71,7 +86,8 @@ function App() {
           selectedSize: selectedSize,
         });
       } else {
-        console.log("Выберите цвет и размер");
+        setModalActive(true);
+        handleTimeout();
       }
     } catch (error) {
       alert(error);
@@ -157,12 +173,13 @@ function App() {
   };
 
   const selectCategory = (category) => {
-    setSelectedCategory((prev) => (prev = category));
+    setSelectedCategory(category);
   };
 
   React.useEffect(() => {
     setSelectedCategory(selectedCategory);
-  }, [selectedCategory]);
+    setSortValue(sortValue);
+  }, [selectedCategory, sortValue]);
 
   function divideNumber(x, delimiter) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delimiter || " ");
@@ -183,8 +200,11 @@ function App() {
         onAddToFavorite,
       }}
     >
-      <div className={`wrapper ${isMobile ? "wrapperMobile" : ""}`}>
-        <Header setSearchValue={setSearchValue} />
+      <Header setSearchValue={setSearchValue} />
+      <div
+        style={{ paddingTop: "130px" }}
+        className={`wrapper ${isMobile ? "wrapperMobile" : ""}`}
+      >
         <Routes>
           <Route
             path="/"
@@ -194,6 +214,9 @@ function App() {
                 categories={categories}
                 selectedCategory={selectedCategory}
                 selectCategory={selectCategory}
+                sortValue={sortValue}
+                setSortValue={setSortValue}
+                setItems={setItems}
               />
             }
           ></Route>
@@ -203,11 +226,16 @@ function App() {
               <Cart onClickRemove={onClickRemove} onCartClear={onCartClear} />
             }
           ></Route>
-          <Route path="/favorites" element={<Favorites/>}></Route>
-          <Route path="/search" element={<Favorites searchValue={searchValue}/>}></Route>
+          <Route path="/favorites" element={<Favorites />}></Route>
+          <Route
+            path="/search"
+            element={<Favorites searchValue={searchValue} />}
+          ></Route>
         </Routes>
-
-        {/* <Cart onClickRemove={onClickRemove} onCartClear={onCartClear} /> */}
+        <ModalSizeColor
+          modalActive={modalActive}
+          setModalActive={setModalActive}
+        />
       </div>
     </AppContext.Provider>
   );

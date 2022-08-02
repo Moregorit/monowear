@@ -157,6 +157,12 @@
     width: 45px;
     height: 45px;
 
+    &:hover {
+      cursor: pointer;
+      background: #f3f3f380;
+      transition: all 0.15s;
+    }
+
     &:first-child {
         margin-left: 16px;
     }

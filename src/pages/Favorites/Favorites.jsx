@@ -11,16 +11,19 @@ function Favorites({ searchValue }) {
 
   return (
     <div className="content">
+      <div onClick={() => navigate(-1)} className="backButton"><img src="./img/back.svg" width={9} alt="goBack" /><h6>Назад</h6></div>
       {!items.some((item) => isFavorite(item)) && pathIsFavorite() ? (<>
-                <div onClick={() => navigate(-1)} className="backButton"><img src="./img/back.svg" width={9} alt="goBack" /><h6>Назад</h6></div>
+                
         <h2>Ваш список желаний пуст</h2></>
       ) : (
         <>
-        <div onClick={() => navigate(-1)} className="backButton"><img src="./img/back.svg" width={9} alt="goBack" /><h6>Назад</h6></div>
           <h2 style={{ marginBottom: "30px" }}>
             {pathIsFavorite()
               ? "Избранное"
-              : `Результаты по запросу "${searchValue}"`}
+              : `${items
+                .filter((item) =>
+                  item.name.toLowerCase().includes(searchValue.toLowerCase())
+                ).length !== 0 ? `Результаты` : `Нет результатов`}  по запросу "${searchValue}"`}
           </h2>
           <div className="products">
             {pathIsFavorite()

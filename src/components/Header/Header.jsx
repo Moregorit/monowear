@@ -106,8 +106,9 @@ function Header({ setSearchValue }) {
             </div>
           </Link>
         </div>
+        <div className={headerStyles.headerLine}></div>
+
       </div>
-      <div className={headerStyles.headerLine}></div>
     </div>
   );
 }
