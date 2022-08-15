@@ -10,24 +10,9 @@ function Home({
   selectCategory,
   sortValue,
   setSortValue,
-  setItems
+  sortItems
 }) {
   const { isMobile, loading, items } = React.useContext(AppContext);
-
-  const sortItems = async () => {
-    switch (sortValue) {
-      case "популярность":
-        await setItems(items => items.sort((a, b) => b.ordersQuantity - a.ordersQuantity));
-        break;
-      case "сначала дороже":
-       await setItems(items => items.sort((a, b) => b.price - a.price));
-        break;
-      case "сначала дешевле":
-       await setItems(items => items.sort((a, b) => a.price - b.price));
-        break;
-        default: setItems(items => items.sort((a, b) => b.ordersQuantity - a.ordersQuantity));
-    }
-  };
 
   return (
     <div className="content">

@@ -3,6 +3,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.scss";
+import port from "./port.json"
 import Header from "./components/Header/Header";
 import Cart from "./pages/Cart/Cart";
 import AppContext from "./context";
@@ -28,16 +29,16 @@ function App() {
     async function fetchData() {
       await setIsLoading(true);
       const itemsRes = await axios
-        .get("http://localhost:3003/items")
+        .get(`http://localhost:${port.port}/items`)
         .then((res) => res);
       const cartItemsRes = await axios
-        .get("http://localhost:3003/cart")
+        .get(`http://localhost:${port.port}/cart`)
         .then((res) => res);
       const categoriesRes = await axios
-        .get("http://localhost:3003/categories")
+        .get(`http://localhost:${port.port}/categories`)
         .then((res) => res);
       const favoritesRes = await axios
-        .get("http://localhost:3003/favorites")
+        .get(`http://localhost:${port.port}/favorites`)
         .then((res) => res);
 
       await setItems(
@@ -79,7 +80,7 @@ function App() {
             selectedSize: selectedSize,
           },
         ]);
-        await axios.post("http://localhost:3003/cart", {
+        await axios.post(`http://localhost:${port}/cart`, {
           ...item,
           count: 1,
           selectedColor: selectedColor,
@@ -113,7 +114,7 @@ function App() {
 
     const regex = /pisos/; //class name of card  -/+ buttons
     regex.test(e.target.className) // if click on card item, not in a cart
-      ? await axios.put(`http://localhost:3003/cart/${cartItem.id}`, {
+      ? await axios.put(`http://localhost:${port}/cart/${cartItem.id}`, {
           category: cartItem.category,
           colors: cartItem.colors,
           sizes: cartItem.sizes,
@@ -127,9 +128,9 @@ function App() {
           selectedSize:
             selectedSize === "" ? cartItem.selectedSize : selectedSize,
         })
-      : await axios.put(`http://localhost:3003/cart/${e.target.id}`, cartItem);
+      : await axios.put(`http://localhost:${port}/cart/${e.target.id}`, cartItem);
     const cartItemsRes = await axios
-      .get("http://localhost:3003/cart")
+      .get(`http://localhost:${port}/cart`)
       .then((res) => res);
     await setCartItems(cartItemsRes.data);
   };
@@ -138,12 +139,12 @@ function App() {
     await setCartItems((prev) =>
       prev.filter((cartItem) => cartItem.id !== item.id)
     );
-    await axios.delete(`http://localhost:3003/cart/${item.id}`);
+    await axios.delete(`http://localhost:${port}/cart/${item.id}`);
   };
 
   const onCartClear = async () => {
     await cartItems.forEach((item) =>
-      axios.delete(`http://localhost:3003/cart/${item.id}`)
+      axios.delete(`http://localhost:${port}/cart/${item.id}`)
     );
     await setCartItems([]);
   };
@@ -154,10 +155,10 @@ function App() {
         await setFavorites((prev) =>
           prev.filter((favItem) => favItem.id !== item.id)
         );
-        await axios.delete(`http://localhost:3003/favorites/${item.id}`);
+        await axios.delete(`http://localhost:${port}/favorites/${item.id}`);
       } else {
         await setFavorites((prev) => [...prev, item]);
-        await axios.post("http://localhost:3003/favorites", item);
+        await axios.post(`http://localhost:${port}/favorites`, item);
       }
     } catch (error) {
       console.log(error);
@@ -170,6 +171,21 @@ function App() {
 
   const isFavorite = (item) => {
     return favorites.some((cartItem) => cartItem.id === item.id);
+  };
+
+  const sortItems = async () => {
+    switch (sortValue) {
+      case "популярность":
+        await setItems(items => items.sort((a, b) => b.ordersQuantity - a.ordersQuantity));
+        break;
+      case "сначала дороже":
+       await setItems(items => items.sort((a, b) => b.price - a.price));
+        break;
+      case "сначала дешевле":
+       await setItems(items => items.sort((a, b) => a.price - b.price));
+        break;
+        default: setItems(items => items.sort((a, b) => b.ordersQuantity - a.ordersQuantity));
+    }
   };
 
   const selectCategory = (category) => {
@@ -198,6 +214,8 @@ function App() {
         onAddToCart,
         isFavorite,
         onAddToFavorite,
+        sortValue,
+        setSortValue
       }}
     >
       <Header setSearchValue={setSearchValue} />
@@ -216,7 +234,7 @@ function App() {
                 selectCategory={selectCategory}
                 sortValue={sortValue}
                 setSortValue={setSortValue}
-                setItems={setItems}
+                sortItems={sortItems}
               />
             }
           ></Route>

@@ -177,53 +177,6 @@
         "Штаны и шорты"
       ],
       "ordersQuantity": 1562
-    },
-    {
-      "id": 3,
-      "name": "Шорты Nike в стиле оверсайз",
-      "img": [
-        "shorts-nike-oversized-white.webp",
-        "shorts-nike-oversized-black.webp"
-      ],
-      "colors": [
-        "белый",
-        "черный"
-      ],
-      "sizes": [
-        "S",
-        "M",
-        "L",
-        "XL"
-      ],
-      "price": 1599,
-      "category": [
-        "Все",
-        "Штаны и шорты"
-      ],
-      "ordersQuantity": 677
-    },
-    {
-      "id": 5,
-      "name": "Носки длинные трикотажные",
-      "img": [
-        "socks-long-ribbed-white.webp",
-        "socks-long-ribbed-black.webp"
-      ],
-      "colors": [
-        "белый",
-        "черный"
-      ],
-      "sizes": [
-        "36-39",
-        "40-42",
-        "43-45"
-      ],
-      "price": 999,
-      "category": [
-        "Все",
-        "Аксессуары"
-      ],
-      "ordersQuantity": 892
     }
   ]
 }

@@ -175,6 +175,6 @@ input {
   grid-template-columns: repeat(auto-fit, min(250px));
   column-gap: 65px;
   row-gap: 30px;
-  justify-content: space-around;
+  justify-content:flex-start;
   margin-right: 20px;
 }
