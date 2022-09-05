@@ -1,9 +1,11 @@
-import React from "react";
+import {useState, useContext} from "react";
+import AppContext from "../../context";
 
 import styles from "./Sort.module.scss";
 
-function Sort({sortValue, setSortValue, sortItems}) {
-  const [sortActive, setSortActive] = React.useState(false);
+function Sort() {
+  const [sortActive, setSortActive] = useState(false);
+  const {sortValue, sortItems} = useContext(AppContext)
 
   return (
     <div className={styles.sort}>
@@ -24,15 +26,15 @@ function Sort({sortValue, setSortValue, sortItems}) {
         </h6>
         {sortActive && (
           <div className={styles.sortModal}>
-            <div onClick={() => {setSortValue("популярность"); setSortActive(false); sortItems()}} className={styles.sortElem}>
+            <div onClick={() => {setSortActive(false); sortItems("популярность")}} className={styles.sortElem}>
               <h6>Популярное</h6>
               <div className={styles.sortDivider}></div>
             </div>
-            <div onClick={() => {setSortValue("сначала дешевле"); setSortActive(false); sortItems()}} className={styles.sortElem}>
+            <div onClick={() => {setSortActive(false); sortItems("сначала дешевле")}} className={styles.sortElem}>
               <h6>Дешевое</h6>
               <div className={styles.sortDivider}></div>
             </div>
-            <div onClick={() => {setSortValue("сначала дороже"); setSortActive(false); sortItems()}} className={styles.sortElem}>
+            <div onClick={() => {setSortActive(false); sortItems("сначала дороже")}} className={styles.sortElem}>
               <h6>Дорогое</h6>
             </div>
           </div>

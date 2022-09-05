@@ -152,8 +152,59 @@
     "Верхняя одежда",
     "Аксессуары"
   ],
-  "cart": [],
+  "cart": [
+    {
+      "category": [
+        "Все",
+        "Штаны и шорты"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "id": 2,
+      "img": [
+        "joggers-free-crop-white.webp",
+        "joggers-free-crop-black.webp"
+      ],
+      "price": 2349,
+      "name": "Укороченые свободные спортивные штаны Nike",
+      "count": 1,
+      "selectedColor": 0,
+      "selectedSize": 1
+    }
+  ],
   "favorites": [
+    {
+      "id": 3,
+      "name": "Шорты Nike в стиле оверсайз",
+      "img": [
+        "shorts-nike-oversized-white.webp",
+        "shorts-nike-oversized-black.webp"
+      ],
+      "colors": [
+        "белый",
+        "черный"
+      ],
+      "sizes": [
+        "S",
+        "M",
+        "L",
+        "XL"
+      ],
+      "price": 1599,
+      "category": [
+        "Все",
+        "Штаны и шорты"
+      ],
+      "ordersQuantity": 677
+    },
     {
       "id": 2,
       "name": "Укороченые свободные спортивные штаны Nike",

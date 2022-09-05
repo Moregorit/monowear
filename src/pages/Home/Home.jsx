@@ -1,4 +1,4 @@
-import React from "react";
+import { useContext } from "react";
 import AppContext from "../../context";
 
 import Card from "../../components/Card/Card";
@@ -8,11 +8,8 @@ function Home({
   categories,
   selectedCategory,
   selectCategory,
-  sortValue,
-  setSortValue,
-  sortItems
 }) {
-  const { isMobile, loading, items } = React.useContext(AppContext);
+  const { isMobile, loading, items } = useContext(AppContext);
 
   return (
     <div className="content">
@@ -32,11 +29,9 @@ function Home({
             </div>
           ))}
         </div>
-        {!isMobile && (
-          <Sort sortItems={sortItems} sortValue={sortValue} setSortValue={setSortValue} />
-        )}
+        {!isMobile && <Sort />}
       </div>
-      {isMobile && <Sort sortItems={sortItems} sortValue={sortValue} setSortValue={setSortValue} />}
+      {isMobile && <Sort />}
 
       <h2 className="title">{selectedCategory}</h2>
       {loading && <img src="./img/loading.svg" alt="loading" />}
@@ -46,7 +41,7 @@ function Home({
             item.category.some((category) => category === selectedCategory)
           )
           .map((item) => (
-            <Card key={item.id} item={item}/>
+            <Card key={item.id} item={item} />
           ))}
       </div>
     </div>

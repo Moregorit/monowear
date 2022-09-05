@@ -1,4 +1,4 @@
-import React from "react";
+import {useContext} from "react";
 import { useNavigate } from "react-router-dom";
 
 import AppContext from "../../context";
@@ -6,7 +6,7 @@ import CartItem from "../../components/CartItem/CartItem";
 import "./Cart.scss";
 
 export default function Cart({onClickRemove, onCartClear}) {
-  const { cartItems, divideNumber } = React.useContext(AppContext);
+  const { cartItems, divideNumber } = useContext(AppContext);
   const navigate  = useNavigate();
   return (
     <div className="cartWrapper">

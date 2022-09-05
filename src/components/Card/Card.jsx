@@ -1,14 +1,22 @@
-import React from "react";
+import { useState, useContext } from "react";
 
 import AppContext from "../../context";
 import "./Card.scss";
 
 function Card({ item }) {
-  const { divideNumber, onCountChange, cartItems, onAddToCart, onAddToFavorite, isAdded, isFavorite } =
-    React.useContext(AppContext);
-  const [selectedColor, setSelectedColor] = React.useState("");
-  const [selectedSize, setSelectedSize] = React.useState("");
-  const [changedOnce, setChangedOnce] = React.useState([
+  const {
+    divideNumber,
+    onCountChange,
+    cartItems,
+    onAddToCart,
+    onAddToFavorite,
+    isAdded,
+    isFavorite,
+  } = useContext(AppContext);
+
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [changedOnce, setChangedOnce] = useState([
     false,
     Math.round(Math.random()),
   ]);
@@ -25,10 +33,6 @@ function Card({ item }) {
     changedOnce[0] !== false &&
       setChangedOnce([true, Math.round(Math.random())]);
   }
-
-  React.useEffect(() => {
-    setSelectedColor(selectedColor);
-  }, [selectedColor]);
 
   return (
     <div className="card" key={item.id}>
@@ -94,14 +98,14 @@ function Card({ item }) {
               <div
                 onClick={(e) => onCountChange(e, selectedColor, selectedSize)}
                 id={item.id}
-                className="cardQuantityButton minus pisos"
+                className="cardQuantityButton minus cardPlusMinus"
               >
                 <img
                   id={item.id}
                   src="./img/minus.svg"
                   width={12}
                   alt="minus"
-                  className="minus pisos"
+                  className="minus cardPlusMinus"
                 />
               </div>
               <h3 className="cardCount">
@@ -110,14 +114,14 @@ function Card({ item }) {
               <div
                 id={item.id}
                 onClick={(e) => onCountChange(e, selectedColor, selectedSize)}
-                className="cardQuantityButton plus pisos"
+                className="cardQuantityButton plus cardPlusMinus"
               >
                 <img
                   id={item.id}
                   src="./img/plus.svg"
                   width={12}
                   alt="plus"
-                  className="plus pisos"
+                  className="plus cardPlusMinus"
                 />
               </div>
             </div>

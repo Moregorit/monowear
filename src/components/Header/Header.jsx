@@ -1,4 +1,4 @@
-import React from "react";
+import {useState, useContext, useRef} from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import AppContext from "../../context";
@@ -6,10 +6,10 @@ import styles from "./Search.module.scss";
 import headerStyles from "./Header.module.scss";
 
 function Header({ setSearchValue }) {
-  const { divideNumber, cartItems, isMobile } = React.useContext(AppContext);
-  const [searchActive, setSearchActive] = React.useState(false);
+  const { divideNumber, cartItems, isMobile } = useContext(AppContext);
+  const [searchActive, setSearchActive] = useState(false);
 
-  const inputRef = React.useRef();
+  const inputRef = useRef();
   const navigate = useNavigate();
 
   function handleInputClick() {

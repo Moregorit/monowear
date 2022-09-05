@@ -1,65 +1,63 @@
 import axios from "axios";
-import React from "react";
+import { useState, useEffect, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.scss";
-import port from "./port.json"
+import port from "./port.json";
 import Header from "./components/Header/Header";
 import Cart from "./pages/Cart/Cart";
 import AppContext from "./context";
 import Home from "./pages/Home/Home";
 import Favorites from "./pages/Favorites/Favorites";
-import ModalSizeColor from "./components/ModalSizeColor/ModalSizeColor";
+import ChangeColorModal from "./components/ChangeColorModal/ChangeColorModal";
 
 function App() {
-  const [items, setItems] = React.useState([]);
-  const [cartItems, setCartItems] = React.useState([]);
-  const [favorites, setFavorites] = React.useState([]);
-  const [categories, setCategories] = React.useState([]);
-  const [selectedCategory, setSelectedCategory] = React.useState("Все");
-  const [loading, setIsLoading] = React.useState(false);
-  const [searchValue, setSearchValue] = React.useState("");
-  const [sortValue, setSortValue] = React.useState("популярность");
-  const [modalActive, setModalActive] = React.useState(false);
+  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [favorites, setFavorites] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("Все");
+  const [loading, setIsLoading] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [sortValue, setSortValue] = useState("популярность");
+  const [isModalActive, setModalActive] = useState(false);
 
   const isMobile = window.matchMedia("(max-width: 926px)").matches;
   // (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent))
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function fetchData() {
-      await setIsLoading(true);
-      const itemsRes = await axios
-        .get(`http://localhost:${port.port}/items`)
-        .then((res) => res);
-      const cartItemsRes = await axios
-        .get(`http://localhost:${port.port}/cart`)
-        .then((res) => res);
-      const categoriesRes = await axios
-        .get(`http://localhost:${port.port}/categories`)
-        .then((res) => res);
-      const favoritesRes = await axios
-        .get(`http://localhost:${port.port}/favorites`)
-        .then((res) => res);
+      setIsLoading(true);
+      const itemsRes = await axios.get(`http://localhost:${port.port}/items`);
+      const cartItemsRes = await axios.get(
+        `http://localhost:${port.port}/cart`
+      );
+      const categoriesRes = await axios.get(
+        `http://localhost:${port.port}/categories`
+      );
+      const favoritesRes = await axios.get(
+        `http://localhost:${port.port}/favorites`
+      );
 
-      await setItems(
+      setItems(
         itemsRes.data.sort((a, b) => b.ordersQuantity - a.ordersQuantity)
       );
-      await setCartItems(cartItemsRes.data);
-      await setCategories(categoriesRes.data);
-      await setFavorites(favoritesRes.data);
-      await setIsLoading(false);
+      setCartItems(cartItemsRes.data);
+      setCategories(categoriesRes.data);
+      setFavorites(favoritesRes.data);
+      setIsLoading(false);
     }
 
     fetchData();
   }, []);
 
-  const timerRef = React.useRef(null);
+  const timerRef = useRef(null);
   const handleTimeout = () => {
     timerRef.current = setTimeout(() => {
       setModalActive(false);
     }, 2000);
   };
-  React.useEffect(() => {
+  useEffect(() => {
     return () => clearTimeout(timerRef.current); // очистка таймера
   }, []);
 
@@ -71,8 +69,8 @@ function App() {
         (selectedSize || selectedSize === 0) &&
         !isAdded(item)
       ) {
-        await setCartItems((prev) => [
-          ...prev,
+        setCartItems([
+          ...cartItems,
           {
             ...item,
             count: 1,
@@ -80,7 +78,7 @@ function App() {
             selectedSize: selectedSize,
           },
         ]);
-        await axios.post(`http://localhost:${port}/cart`, {
+        await axios.post(`http://localhost:${port.port}/cart`, {
           ...item,
           count: 1,
           selectedColor: selectedColor,
@@ -112,9 +110,9 @@ function App() {
       }
     })();
 
-    const regex = /pisos/; //class name of card  -/+ buttons
+    const regex = /cardPlusMinus/; //class name of card -/+ buttons
     regex.test(e.target.className) // if click on card item, not in a cart
-      ? await axios.put(`http://localhost:${port}/cart/${cartItem.id}`, {
+      ? await axios.put(`http://localhost:${port.port}/cart/${cartItem.id}`, {
           category: cartItem.category,
           colors: cartItem.colors,
           sizes: cartItem.sizes,
@@ -128,37 +126,40 @@ function App() {
           selectedSize:
             selectedSize === "" ? cartItem.selectedSize : selectedSize,
         })
-      : await axios.put(`http://localhost:${port}/cart/${e.target.id}`, cartItem);
+      : await axios.put(
+          `http://localhost:${port.port}/cart/${e.target.id}`,
+          cartItem
+        );
     const cartItemsRes = await axios
-      .get(`http://localhost:${port}/cart`)
+      .get(`http://localhost:${port.port}/cart`)
       .then((res) => res);
-    await setCartItems(cartItemsRes.data);
+    setCartItems(cartItemsRes.data);
   };
 
   const onClickRemove = async (item) => {
-    await setCartItems((prev) =>
-      prev.filter((cartItem) => cartItem.id !== item.id)
-    );
-    await axios.delete(`http://localhost:${port}/cart/${item.id}`);
+    setCartItems([...cartItems.filter((cartItem) => cartItem.id !== item.id)]);
+    await axios.delete(`http://localhost:${port.port}/cart/${item.id}`);
   };
 
   const onCartClear = async () => {
+    setCartItems([]);
     await cartItems.forEach((item) =>
-      axios.delete(`http://localhost:${port}/cart/${item.id}`)
+      axios.delete(`http://localhost:${port.port}/cart/${item.id}`)
     );
-    await setCartItems([]);
   };
 
   const onAddToFavorite = async (item) => {
     try {
       if (isFavorite(item)) {
-        await setFavorites((prev) =>
-          prev.filter((favItem) => favItem.id !== item.id)
+        setFavorites([
+          ...favorites.filter((favItem) => favItem.id !== item.id),
+        ]);
+        await axios.delete(
+          `http://localhost:${port.port}/favorites/${item.id}`
         );
-        await axios.delete(`http://localhost:${port}/favorites/${item.id}`);
       } else {
-        await setFavorites((prev) => [...prev, item]);
-        await axios.post(`http://localhost:${port}/favorites`, item);
+        setFavorites([...favorites, item]);
+        await axios.post(`http://localhost:${port.port}/favorites`, item);
       }
     } catch (error) {
       console.log(error);
@@ -173,29 +174,30 @@ function App() {
     return favorites.some((cartItem) => cartItem.id === item.id);
   };
 
-  const sortItems = async () => {
+  const sortItems = (value) => {
+    setSortValue(value);
     switch (sortValue) {
       case "популярность":
-        await setItems(items => items.sort((a, b) => b.ordersQuantity - a.ordersQuantity));
+        setItems([
+          ...items.sort((a, b) => b.ordersQuantity - a.ordersQuantity),
+        ]);
         break;
       case "сначала дороже":
-       await setItems(items => items.sort((a, b) => b.price - a.price));
+        setItems([...items.sort((a, b) => b.price - a.price)]);
         break;
       case "сначала дешевле":
-       await setItems(items => items.sort((a, b) => a.price - b.price));
+        setItems([...items.sort((a, b) => a.price - b.price)]);
         break;
-        default: setItems(items => items.sort((a, b) => b.ordersQuantity - a.ordersQuantity));
+      default:
+        setItems([
+          ...items.sort((a, b) => b.ordersQuantity - a.ordersQuantity),
+        ]);
     }
   };
 
   const selectCategory = (category) => {
     setSelectedCategory(category);
   };
-
-  React.useEffect(() => {
-    setSelectedCategory(selectedCategory);
-    setSortValue(sortValue);
-  }, [selectedCategory, sortValue]);
 
   function divideNumber(x, delimiter) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, delimiter || " ");
@@ -215,7 +217,7 @@ function App() {
         isFavorite,
         onAddToFavorite,
         sortValue,
-        setSortValue
+        sortItems,
       }}
     >
       <Header setSearchValue={setSearchValue} />
@@ -237,21 +239,21 @@ function App() {
                 sortItems={sortItems}
               />
             }
-          ></Route>
+          />
           <Route
             path="/cart"
             element={
               <Cart onClickRemove={onClickRemove} onCartClear={onCartClear} />
             }
-          ></Route>
-          <Route path="/favorites" element={<Favorites />}></Route>
+          />
+          <Route path="/favorites" element={<Favorites />} />
           <Route
             path="/search"
             element={<Favorites searchValue={searchValue} />}
-          ></Route>
+          />
         </Routes>
-        <ModalSizeColor
-          modalActive={modalActive}
+        <ChangeColorModal
+          isModalActive={isModalActive}
           setModalActive={setModalActive}
         />
       </div>

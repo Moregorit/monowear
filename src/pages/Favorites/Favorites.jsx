@@ -1,11 +1,11 @@
-import React from "react";
+import {useContext} from "react";
 import AppContext from "../../context";
 import { useNavigate } from "react-router-dom";
 
 import Card from "../../components/Card/Card";
 
 function Favorites({ searchValue }) {
-  const { items, isFavorite } = React.useContext(AppContext);
+  const { items, isFavorite } = useContext(AppContext);
   const navigate = useNavigate();
   const pathIsFavorite = () => window.location.pathname === "/favorites";
 
