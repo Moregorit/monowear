@@ -1,5 +1,5 @@
 # **🧦Monowear🧦**
-*— The website of the clothing store created with the react.*
+*— The website of the clothing store created on react.*
 
 tg: @Moregorit
 
